@@ -85,6 +85,7 @@ prototype(Jonnitto.PrettyEmbedVideoPlatforms:Content.Video) < prototype(Jonnitto
 
     @private {
         videoID = ${props.metadata.videoID ? props.metadata.videoID : (props.videoID && props.platform ? Jonnitto.PrettyEmbedHelper.platformID(props.videoID, props.platform) : props.videoID)}
+        hash = ${props.metadata.hash ? props.metadata.hash : null}
         posterThumbnail = ${Jonnitto.PrettyEmbedHelper.createThumbnail(props.image || props.metadata.thumbnail, props.maximumWidth, props.imageformat)}
         posterThumbnail.@if.noCustomPreview = ${!props.content && (props.image || props.metadata.thumbnail)}
         basisOptions = Neos.Fusion:DataStructure {
@@ -210,6 +211,7 @@ prototype(Jonnitto.PrettyEmbedVideoPlatforms:Content.Video) < prototype(Jonnitto
             renderer = Jonnitto.PrettyEmbed:Presentation.Vimeo {
                 @apply.props = ${private.basisOptions}
                 videoID = ${private.videoID}
+                hash = ${private.hash}
                 color = ${props.color}
             }
         }
