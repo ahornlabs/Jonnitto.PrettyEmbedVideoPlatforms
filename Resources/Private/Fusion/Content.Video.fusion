@@ -199,6 +199,7 @@ prototype(Jonnitto.PrettyEmbedVideoPlatforms:Content.Video) < prototype(Jonnitto
             }
         }
         youtube {
+            @position = 'end 2'
             condition = ${props.platform == 'youtube'}
             renderer = Jonnitto.PrettyEmbed:Presentation.YouTube {
                 @apply.props = ${private.basisOptions}
@@ -207,6 +208,7 @@ prototype(Jonnitto.PrettyEmbedVideoPlatforms:Content.Video) < prototype(Jonnitto
             }
         }
         vimeo {
+            @position = 'end 1'
             condition = ${props.platform == 'vimeo'}
             renderer = Jonnitto.PrettyEmbed:Presentation.Vimeo {
                 @apply.props = ${private.basisOptions}
