@@ -28,7 +28,30 @@ prototype(Jonnitto.PrettyEmbedVideoPlatforms:Content.Video) < prototype(Jonnitto
     label = ${this.metadata ? this.metadata.title : null}
     aspectRatio = ${this.metadata ? this.metadata.aspectRatio : null}
 
-    platform = ${q(node).property('platform')}
+
+    platform = Neos.Fusion:Case {
+        hasStoredPlatform {
+            condition = ${q(node).property('platform')}
+            renderer = ${q(node).property('platform')}
+        }
+        isVimeoUrl {
+            condition = ${q(node).property('videoID') && String.pregMatch(q(node).property('videoID'), '/vimeo\.com/')}
+            renderer = 'vimeo'
+        }
+        isYoutubeUrl {
+            condition = ${q(node).property('videoID') && String.pregMatch(q(node).property('videoID'), '/youtu\.?be|youtube/')}
+            renderer = 'youtube'
+        }
+        isVimeoId {
+            condition = ${q(node).property('videoID') && String.pregMatch(q(node).property('videoID'), '/^\d+$/')}
+            renderer = 'vimeo'
+        }
+        isYoutubeId {
+            condition = ${q(node).property('videoID')}
+            renderer = 'youtube'
+        }
+    }
+    
     player = ${this.platform == 'youtube' ? 'YouTube' : 'Vimeo'}
     type = ${q(node).property('type')}
     videoID = ${q(node).property('videoID')}
